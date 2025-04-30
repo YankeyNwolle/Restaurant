@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User  
-from .models import Profile, Recette, Ingredient, Etape
+from .models import Profile, Recette, Ingredient, Etape, Order
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -28,4 +28,9 @@ class IngredientSerializer(serializers.ModelSerializer):
 class EtapeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Etape
+        fields = '__all__'
+
+class OrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
         fields = '__all__'

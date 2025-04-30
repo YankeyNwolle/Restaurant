@@ -19,4 +19,18 @@ class RecetteAPIView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+class OrderAPIView(APIView):
+    # recuperer une les commandes
+    def get(self, request):
+
+    # ajouter une nouvelle commandes
+    def post(self, request):
+    
+    # modifier une commande
+    def put(self, request):
+    
+    # supprimer une commande
+    def delete(self, request):
+        
 
