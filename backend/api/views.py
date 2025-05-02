@@ -55,16 +55,15 @@ class OrderAPIView(APIView):
 
     
     # supprimer une commande
-    def delete(self, request, id):
+    def delete(self, request, *args, **kwargs):
         try:
-            delete = Order.objects.get(id=id)
-            delete.delete()
+            # Récupérer le profil à partir de l'ID (kwargs['id'])
+            order_id = kwargs.get('id')  # Extraction depuis les arguments
+            order = Order.objects.get(id=order_id)
+            order.delete()
+            return Response({"message": "Profil supprimé avec succès"}, status=status.HTTP_200_OK)
         except Order.DoesNotExist:
-            # retourner une reponse si la commande n'existe pas
-            return Response({"error":"Commande introuvable"}, status=status.HTTP_404_NOT_FOUND)
-        # Retourner une réponse réussie
-        return Response({"message": "Commande supprimée avec succès"}, status=status.HTTP_200_OK)
-
+            return Response({"error": "Profil introuvable"}, status=status.HTTP_404_NOT_FOUND)
 
 # recuperer la liste des accounts
 class ProfileAPIView(APIView):
@@ -103,12 +102,12 @@ class ProfileAPIView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     # supprimer un compte existant
-    def delete(self, request, delete_id):
+    def delete(self, request, *args, **kwargs):
         try:
-            delete = Profile.objects.get(id=delete_id)
-            delete.delete()
+            # Récupérer le profil à partir de l'ID (kwargs['id'])
+            profile_id = kwargs.get('id')  # Extraction depuis les arguments
+            profile = Profile.objects.get(id=profile_id)
+            profile.delete()
+            return Response({"message": "Profil supprimé avec succès"}, status=status.HTTP_200_OK)
         except Profile.DoesNotExist:
-            # retourner une reponse si le compte  n'existe pas
-            return Response({"error":"Compte introuvable"}, status=status.HTTP_404_NOT_FOUND)
-        # Retourner une réponse réussie
-        return Response({"message": "Compte supprimée avec succès"}, status=status.HTTP_200_OK)
+            return Response({"error": "Profil introuvable"}, status=status.HTTP_404_NOT_FOUND)
