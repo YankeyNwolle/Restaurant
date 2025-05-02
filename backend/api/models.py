@@ -68,8 +68,8 @@ class Recette(models.Model):
     image = models.ImageField(upload_to="recettes_images/", blank=False, null=False)
     pays = models.CharField(max_length=3, choices=PAYS_AFRIQUE)
     prix = models.IntegerField(default=0)
-    description = description = models.TextField(blank=True, null=True)
-    temps_preparation = models.IntegerField(blank=True, null=True)
+    description = description = models.TextField(blank=False, null=False)
+    temps_preparation = models.IntegerField(blank=False, null=False)
     date_creation = models.DateTimeField(auto_now_add=True)
 
 
@@ -116,11 +116,11 @@ class Order(models.Model):
     recette= models.ForeignKey(Recette,  on_delete=models.CASCADE) 
     customer = models.ForeignKey(User, on_delete=models.CASCADE) 
     quantity = models.IntegerField(default=1) 
-    price = models.IntegerField() 
+    price = models.IntegerField(default=1) 
     address = models.CharField(max_length=50, default='', blank=True) 
     phone = models.CharField(max_length=50, default='', blank=True) 
     date = models.DateField(default=datetime.datetime.today) 
-    status = models.BooleanField(default=False) 
+    status = models.BooleanField(default=True) 
     mode_paiement = models.CharField(max_length=50, choices=[('Carte', 'Carte Bancaire'), ('Espèces', 'Espèces'), ('En Ligne', 'Paiement en Ligne')])
 
    
