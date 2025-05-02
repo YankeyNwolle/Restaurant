@@ -65,7 +65,7 @@ class Recette(models.Model):
     ]
 
     nom_recette = models.CharField(max_length=500)
-    image = models.ImageField(upload_to="images/")
+    image = models.ImageField(upload_to="recettes_images/", blank=False, null=False)
     pays = models.CharField(max_length=3, choices=PAYS_AFRIQUE)
     prix = models.IntegerField(default=0)
     description = description = models.TextField(blank=True, null=True)
